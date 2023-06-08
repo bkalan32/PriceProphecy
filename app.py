@@ -39,16 +39,17 @@ def main():
           st.subheader("Please enter the following inputs:")
 
           year_built = st.slider("how old is your home",1970,2023, value=1970, format="%d")
-          square_ft = st.slider("How big is your home",1,5000, value=0, format="%d")
+          square_ft = st.slider("How big is your home in Sqrft",1,5000, value=0, format="%d")
           bedrooms = st.selectbox("Number of bedrooms", options_Bedrooms)
           bathrooms = st.selectbox("Number of bathrooms", options=options_Bathrooms)
-          Acre_lot = st.slider("Whats the size of the lot",0.01,40.0, value=0, step=0.01 ,format="%d")
-
-
-          submit = st.form_submit_button("Predict")
-
+          Acre_lot = st.number_input("Whats the size of the lot",min_value=0.01, 
+                                                                max_value=35.0, 
+                                                                value=0, step=0.01,
+                                                                format="%.2f", key="Acre_lot" )
+          
+          submitted = st.form_submit_button("Submit")
 # encode using ordinal encoder and predict
-        if submit:
+          if submitted:
              input_array = np.array([year_built,
                   square_ft,bedrooms,bathrooms,
                   Acre_lot], ndmin=2)
